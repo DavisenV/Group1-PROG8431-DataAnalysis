@@ -19,7 +19,7 @@ The notebook [`main.ipynb`](main.ipynb) is both our analysis and the guide for o
 It has 10,000 rows (one per machine run), 12 columns and no missing values.
 
 | Column | Meaning | Unit / values |
-|---|---|---|
+| --- | --- | --- |
 | `Type` | Product quality grade | `L` low (60%), `M` medium (30%), `H` high (10%) |
 | `Air temperature [K]` | Temperature around the machine | kelvin |
 | `Process temperature [K]` | Temperature of the cutting process | kelvin |
@@ -29,7 +29,7 @@ It has 10,000 rows (one per machine run), 12 columns and no missing values.
 | `Machine failure` | Did this run fail? | `0` = no, `1` = yes |
 | `TWF`, `HDF`, `PWF`, `OSF`, `RNF` | Failure mode: tool wear, heat dissipation, power, overstrain, random | `0` / `1` flags |
 
-> **Note on column names:** the CSV headers have no units (e.g. `Air temperature`). The `MaintenanceDataset` loader adds the units when it reads the file, so **always load the data through `MaintenanceDataset`** rather than `pd.read_csv`. That way every section uses the same column names.
+> **Note on column names:** the CSV headers have no units (e.g. `Air temperature`). The `MaintenanceDataset` loader adds the units when it reads the file. From Challenge 4 onwards, every section reuses the single `maintenance_dataset` object, so they all see the same column names.
 
 ## Getting started
 
@@ -54,7 +54,7 @@ The whole notebook should finish in under a minute with no errors.
 ### Libraries
 
 | Library | Used for |
-|---|---|
+| --- | --- |
 | pandas | Loading the CSV and calculating statistics |
 | matplotlib | Scatter plot, histogram and box plots |
 | matplotlib-venn | Venn diagram of failure modes |
@@ -62,20 +62,20 @@ The whole notebook should finish in under a minute with no errors.
 
 ## Notebook guide
 
-The sections appear in this order in `main.ipynb`:
+The notebook opens with a title cell listing each member's name and student ID. After that, the sections appear in this order:
 
 | Section | Assignment item | Owner | What it covers |
-|---|---|---|---|
-| Failure mode counts | Challenge 1 | Group | How many runs had each failure mode. This supports our essay in `docs/`. |
-| Dataset overview | Challenge 3 | Person A | A one-minute explanation of every column. |
-| `MaintenanceDataset` class | Challenge 4 | Person A | Loads the CSV once and provides the sensor columns and healthy/failed subsets. |
-| Use case summary | Challenge 5 | Person B | The 50-word summary. |
-| Central tendency and spread (`DescriptiveStats`) | Challenges 5 and 6 | Person B | Mean, median, mode, variance, standard deviation, quartiles and IQR. |
-| Visualization and numerical summary (`MaintenanceVisualizer`) | Challenge 7 | Person C | Scatter plot, histogram, box plots, Venn diagram, a numerical summary, and failure rate by product type. |
+| --- | --- | --- | --- |
+| Setup | | Group | Imports every library and sets one chart style for the whole notebook. **Run it first.** |
+| Why failure modes matter | Challenge 1 | Group | How many runs had each failure mode, as evidence for our essay in `docs/`. |
+| Understanding the data | Challenge 3 | Davis | A one-minute explanation of every column. |
+| `MaintenanceDataset` class | Challenge 4 | Davis | Loads the CSV once and provides the sensor columns and healthy/failed subsets. |
+| Central tendency and spread (`DescriptiveStats`) | Challenges 5 and 6 | Carlos | The 50-word use case summary; mean, median and mode; variance, standard deviation, quartiles and IQR. Each statistic is also compared between healthy and failed runs. |
+| Visualization and numerical summary (`MaintenanceVisualizer`) | Challenge 7 | Nnamdi | Scatter plot, histogram, box plots, Venn diagram, a numerical summary, and failure rate by product type. |
 
 ## Repository layout
 
-```
+```text
 main.ipynb                        the analysis and presentation notebook
 data/predictive_maintenance.csv   the dataset (10,000 rows)
 docs/Group1 - Description.docx    Challenge 1 essay: field of inquiry
@@ -84,11 +84,11 @@ requirements.txt                  pinned library versions
 
 ## Team
 
-| Role | Member | Sections |
-|---|---|---|
-| Person A | Davisen V. ([@DavisenV](https://github.com/DavisenV)) | Dataset overview, `MaintenanceDataset` class |
-| Person B | Carlos Gutierrez | Use case summary, central tendency and spread |
-| Person C | Nnamdi Ikengah ([@Namypark](https://github.com/Namypark)) | Visualization and numerical summary |
+| Member | GitHub | Sections |
+| --- | --- | --- |
+| Davis | [@DavisenV](https://github.com/DavisenV) | Challenges 3 and 4: dataset overview, `MaintenanceDataset` class |
+| Carlos Gutierrez | | Challenges 5 and 6: use case summary, central tendency and spread |
+| Nnamdi Ikengah | [@Namypark](https://github.com/Namypark) | Challenge 7: visualization and numerical summary |
 
 Every member must be able to explain and modify every section, not only their own.
 
@@ -104,8 +104,11 @@ GitHub is our central hub for the project.
 ### Coding standards
 
 - Follow PEP 8 naming: `snake_case` for variables and methods, `PascalCase` for classes, `UPPER_CASE` for constants.
-- Each section keeps its logic in a class and reuses the single `maintenance_dataset` object instead of reading the CSV again.
+- Every class and method has a docstring.
+- From Challenge 4 onwards, each section keeps its logic in a class and reuses the single `maintenance_dataset` object instead of reading the CSV again.
+- Libraries are imported once, in the Setup cell at the top.
 - Every chart or table is followed by a Markdown cell that explains what it shows and why it matters.
+- Each section heading names its author and student ID.
 
 ## Before the presentation
 
